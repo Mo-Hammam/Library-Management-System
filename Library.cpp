@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -9,9 +10,9 @@ class Book
 protected:
     string name_book;
     string author_book;
-    int id_book;
 
 public:
+    int id_book;
     void info_book()
     {
 
@@ -27,9 +28,13 @@ public:
     }
     void displayBook()
     {
-        cout << "The Book of ID:" << id_book << endl;
-        cout << "The Book of Name:" << name_book << endl;
-        cout << "The Book of Author:" << author_book << endl;
+        cout << "-----------------------------------------------\n";
+        cout << setw(10) << "The Book of ID:" << setw(10) << id_book << endl;
+        cout << "-----------------------------------------------\n";
+        cout << setw(10) << "The Book of Name:" << setw(10) << name_book << endl;
+        cout << "-----------------------------------------------\n";
+        cout << setw(10) << "The Book of Author:" << setw(10) << author_book << endl;
+        cout << "-----------------------------------------------\n";
     }
 };
 
@@ -65,7 +70,7 @@ public:
 
         if (Books.empty())
         {
-            cout << "No Books Founded\n";
+            cout << "No Books Founded❗❗❗❗\n";
             return;
         }
         else
@@ -77,6 +82,35 @@ public:
             }
         }
     }
+    void SearchBook(int bookSearch)
+    {
+
+        // cout<<"Enter the ID of Book to Search it:";             // this lines write in  switch of Search Book
+        // cin>>bookSearch;                                     // this lines write in  switch of Search Book
+        if (Books.empty())
+        {
+
+            cout << "No Books Founded❗❗❗❗\n";
+            return;
+        }
+        else
+        {
+            for (int i = 0; i < Books.size(); i++)
+            {
+                if (Books[i].id_book == bookSearch)
+                {
+                    cout << "The Book is Found✅✅✅\n";
+                    Book bb;
+                    bb.info_book();
+                    bb.displayBook();
+                }
+                else
+                {
+                    cout << "This Book isn't Found❗❗❗❗\n";
+                }
+            }
+        }
+    }
 };
 
 int main()
@@ -84,7 +118,8 @@ int main()
 
     Library l1;
     l1.addBook();
-    l1.Display();
+    // l1.Display();
+    l1.SearchBook(63);
 
     return 0;
 }
