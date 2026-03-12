@@ -13,6 +13,7 @@ protected:
 
 public:
     int id_book;
+    bool availbale = true;
     void info_book()
     {
 
@@ -45,8 +46,21 @@ private:
     string name_user;
 
 public:
-    void borrow_book(int id_book)
+    void setNameUser(string s)
     {
+        name_user = s;
+    }
+    string getNameUser()
+    {
+        return name_user;
+    }
+
+    void info_user()
+    {
+        cout << "Enter ID User: ";
+        cin >> id_user;
+        cout << "Enter Name User: ";
+        cin >> name_user;
     }
 };
 
@@ -111,6 +125,26 @@ public:
             }
         }
     }
+
+    void borrow_book(Book borrow_book, User user)
+
+    {
+
+        // user.info_user();                        //Calling it in switch case;
+        // user.setNameUser();
+
+        if (borrow_book.availbale)
+        {
+            borrow_book.availbale = false;
+
+            cout << "Book borrowed Successfully:" << user.getNameUser() << "\n";
+        }
+
+        else
+        {
+            cout << "Book borrowed not successfully\n";
+        }
+    }
 };
 
 int main()
@@ -120,6 +154,8 @@ int main()
     l1.addBook();
     // l1.Display();
     l1.SearchBook(63);
+    User u1;
+    l1.borrow_book();
 
     return 0;
 }
