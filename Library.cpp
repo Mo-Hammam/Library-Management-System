@@ -39,28 +39,25 @@ public:
     }
 };
 
-class User : Book
+class User
 {
 private:
     int id_user;
     string name_user;
 
 public:
-    void setNameUser(string s)
+    void user_info()
     {
-        name_user = s;
+        cout << "Enter UserID:";
+        cin >> id_user;
+        cout << endl;
+        cout << "Enter UserName: ";
+        cin >> name_user;
     }
+
     string getNameUser()
     {
         return name_user;
-    }
-
-    void info_user()
-    {
-        cout << "Enter ID User: ";
-        cin >> id_user;
-        cout << "Enter Name User: ";
-        cin >> name_user;
     }
 };
 
@@ -79,7 +76,7 @@ public:
         Books.push_back(b1);
     }
 
-    void Display()
+    void DisplayBook()
     {
 
         if (Books.empty())
@@ -99,8 +96,6 @@ public:
     void SearchBook(int bookSearch)
     {
 
-        // cout<<"Enter the ID of Book to Search it:";             // this lines write in  switch of Search Book
-        // cin>>bookSearch;                                     // this lines write in  switch of Search Book
         if (Books.empty())
         {
 
@@ -126,12 +121,10 @@ public:
         }
     }
 
-    void borrow_book(Book borrow_book, User user)
+    void borrow_book(Book &borrow_book, User &user)
 
     {
-
-        // user.info_user();                        //Calling it in switch case;
-        // user.setNameUser();
+        user.user_info();
 
         if (borrow_book.availbale)
         {
@@ -142,7 +135,82 @@ public:
 
         else
         {
-            cout << "Book borrowed not successfully\n";
+            cout << "Book not  borrowed \n";
+        }
+    }
+    void Exit_system()
+    {
+        exit(0);
+    }
+
+    void start()
+    {
+
+        int choice;
+        while (true)
+        {
+            cout << "------START_MENU------\n";
+            cout << "1-ADD BOOK\n";
+            cout << "2-DISPLAY BOOK\n";
+            cout << "3-SEARCH BOOK\n";
+            cout << "4-BORROW BOOK\n";
+            // cout<<"1-ADD BOOK\n";
+
+            cout << "Enter Your Choice:";
+            cin >> choice;
+            if (cin.fail())
+            {
+                cout << "invalid Choice❌❌❌\n";
+                cin.clear();
+                cin.ignore(1000, '\n');
+            }
+            else
+
+            {
+                switch (choice)
+                {
+                case 1:
+                    addBook();
+                    break;
+
+                case 2:
+                    DisplayBook();
+                    break;
+
+                case 3:
+
+                    int bookSearch;
+                    cout << "Enter the ID of Book to Search it:";
+                    cin >> bookSearch;
+                    SearchBook(bookSearch);
+                    break;
+                case 4:
+
+                {
+                    int id;
+                    cout << "Enter Book ID:";
+                    cin >> id;
+                    User user_1;
+                    for (int i = 0; i < Books.size(); i++)
+                    {
+                        if (Books[i].id_book == id)
+                        {
+                            borrow_book(Books[i], user_1);
+                        }
+                    }
+                    break;
+                }
+                case 5:
+                {
+                    Exit_system();
+                    break;
+                }
+
+                    // default:
+                    //     cout << "Invaild ,Try Again";
+                    //     break;
+                }
+            }
         }
     }
 };
@@ -151,11 +219,8 @@ int main()
 {
 
     Library l1;
-    l1.addBook();
-    // l1.Display();
-    l1.SearchBook(63);
-    User u1;
-    l1.borrow_book();
+
+    l1.start();
 
     return 0;
 }
