@@ -126,12 +126,12 @@ public:
     void borrow_book(Book &borrow_book, User &user)
 
     {
-        user.user_info();
 
         if (borrow_book.availbale)
         {
             borrow_book.availbale = false;
 
+            user.user_info();
             cout << "Book borrowed Successfully:" << user.getNameUser() << "\n";
         }
 
@@ -139,6 +139,31 @@ public:
         {
             cout << "Book not  borrowed \n";
         }
+    }
+
+    void Return_book(int id)
+    {
+        bool falg = false;
+        for (int i = 0; i < Books.size(); i++)
+        {
+            if (Books[i].id_book == id)
+            {
+                falg = true;
+                if (Books[i].availbale == false)
+                {
+
+                    Books[i].availbale = true;
+                    cout << "Book is available Now\n";
+                }
+                else
+                {
+                    cout << "Book isn't available Now\n";
+                }
+                break;
+            }
+        }
+        if (!falg)
+            cout << "Book is Found❕❕❕\n";
     }
     void Exit_system()
     {
@@ -151,12 +176,13 @@ public:
         int choice;
         while (true)
         {
-            cout << "------START_MENU------\n";
+            cout << "------START-MENU------\n";
             cout << "1-ADD BOOK\n";
             cout << "2-DISPLAY BOOK\n";
             cout << "3-SEARCH BOOK\n";
             cout << "4-BORROW BOOK\n";
-            // cout<<"1-ADD BOOK\n";
+            cout << "5-Return BOOK\n";
+            cout << "6-Exit \n";
 
             cout << "Enter Your Choice:";
             cin >> choice;
@@ -215,13 +241,21 @@ public:
                 }
                 case 5:
                 {
+                    int id;
+                    cout << "Enter the Book ID:";
+                    cin >> id;
+                    Return_book(id);
+                    break;
+                }
+                case 6:
+                {
                     Exit_system();
                     break;
                 }
 
-                    // default:
-                    //     cout << "Invaild ,Try Again";
-                    //     break;
+                default:
+                    cout << "Invaild ,Try Again";
+                    break;
                 }
             }
         }
