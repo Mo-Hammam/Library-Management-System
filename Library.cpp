@@ -25,17 +25,16 @@ public:
         cout << endl;
         cout << "Enter Author: ";
         cin >> author_book;
-        cout << endl;
     }
     void displayBook()
     {
-        cout << "-----------------------------------------------\n";
-        cout << setw(10) << "The Book of ID:" << setw(10) << id_book << endl;
-        cout << "-----------------------------------------------\n";
-        cout << setw(10) << "The Book of Name:" << setw(10) << name_book << endl;
-        cout << "-----------------------------------------------\n";
-        cout << setw(10) << "The Book of Author:" << setw(10) << author_book << endl;
-        cout << "-----------------------------------------------\n";
+        cout << "-------------------------------------\n";
+        cout << setw(10) << "The Book of ID:" << setw(5) << id_book << endl;
+        cout << "-------------------------------------\n";
+        cout << setw(10) << "The Book of Name:" << setw(5) << name_book << endl;
+        cout << "-------------------------------------\n";
+        cout << setw(10) << "The Book of Author:" << setw(5) << author_book << endl;
+        cout << "-------------------------------------\n";
     }
 };
 
@@ -108,14 +107,17 @@ public:
             {
                 if (Books[i].id_book == bookSearch)
                 {
-                    cout << "The Book is Found✅✅✅\n";
-                    Book bb;
-                    bb.info_book();
-                    bb.displayBook();
+                    cout << "✅✅✅\n";
+                    cout << "The Book is Found\n";
+                    cout << "✅✅✅\n";
+                    Books[i].displayBook();
                 }
                 else
                 {
-                    cout << "This Book isn't Found❗❗❗❗\n";
+                    cout << "❗❗❗❗\n";
+                    cout << "This Book isn't Found\n";
+                    cout << "❗❗❗❗\n";
+                    return;
                 }
             }
         }
@@ -187,18 +189,29 @@ public:
                 case 4:
 
                 {
-                    int id;
-                    cout << "Enter Book ID:";
-                    cin >> id;
-                    User user_1;
-                    for (int i = 0; i < Books.size(); i++)
+                    if (Books.empty())
                     {
-                        if (Books[i].id_book == id)
-                        {
-                            borrow_book(Books[i], user_1);
-                        }
+
+                        cout << "NO Books in Library❓❓❓\n";
+                        cout << "PLEASE ADD BOOKS\n";
+                        break;
                     }
-                    break;
+                    else
+                    {
+
+                        int id;
+                        cout << "Enter Book ID:";
+                        cin >> id;
+                        User user_1;
+                        for (int i = 0; i < Books.size(); i++)
+                        {
+                            if (Books[i].id_book == id)
+                            {
+                                borrow_book(Books[i], user_1);
+                            }
+                        }
+                        break;
+                    }
                 }
                 case 5:
                 {
