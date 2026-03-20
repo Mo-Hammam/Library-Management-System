@@ -165,6 +165,31 @@ public:
         if (!falg)
             cout << "Book is Found❕❕❕\n";
     }
+
+    void Delete_book(int id)
+    {
+
+        if (Books.empty())
+        {
+
+            cout << "NO Books in Library\n";
+            return;
+        }
+        else
+        {
+
+            for (int i = 0; i < Books.size(); i++)
+            {
+                if (Books[i].id_book == id)
+                {
+                    Books.erase(Books.begin() + i);
+                    cout << "Book deleted\n";
+                    return;
+                }
+            }
+        }
+    }
+
     void Exit_system()
     {
         exit(0);
@@ -181,8 +206,9 @@ public:
             cout << "2-DISPLAY BOOK\n";
             cout << "3-SEARCH BOOK\n";
             cout << "4-BORROW BOOK\n";
-            cout << "5-Return BOOK\n";
-            cout << "6-Exit \n";
+            cout << "5-RETURN BOOK\n";
+            cout << "6-DELETE BOOK\n";
+            cout << "7-Exit \n";
 
             cout << "Enter Your Choice:";
             cin >> choice;
@@ -248,6 +274,14 @@ public:
                     break;
                 }
                 case 6:
+                {
+                    int id;
+                    cout << "Enter Book id:";
+                    cin >> id;
+                    Delete_book(id);
+                    break;
+                }
+                case 7:
                 {
                     Exit_system();
                     break;
