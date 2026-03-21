@@ -26,15 +26,26 @@ public:
         cout << "Enter Author: ";
         cin >> author_book;
     }
+    // void displayBook()
+    // {
+    //     cout << "-------------------------------------\n";
+    //     cout << setw(10) << "The Book of ID:" << setw(5) << id_book << endl;
+    //     cout << "-------------------------------------\n";
+    //     cout << setw(10) << "The Book of Name:" << setw(5) << name_book << endl;
+    //     cout << "-------------------------------------\n";
+    //     cout << setw(10) << "The Book of Author:" << setw(5) << author_book << endl;
+    //     cout << "-------------------------------------\n";
+    // }
     void displayBook()
     {
+
+        cout << setw(5) << id_book << setw(10) << name_book << setw(10) << author_book << setw(10) << availbale << endl;
         cout << "-------------------------------------\n";
-        cout << setw(10) << "The Book of ID:" << setw(5) << id_book << endl;
-        cout << "-------------------------------------\n";
-        cout << setw(10) << "The Book of Name:" << setw(5) << name_book << endl;
-        cout << "-------------------------------------\n";
-        cout << setw(10) << "The Book of Author:" << setw(5) << author_book << endl;
-        cout << "-------------------------------------\n";
+        // cout << "-------------------------------------\n";
+        // cout << setw(5) << "The Book of Name:" << setw(5) << name_book << endl;
+        // cout << "-------------------------------------\n";
+        // cout << setw(5) << "The Book of Author:" << setw(5) << author_book << endl;
+        // cout << "-------------------------------------\n";
     }
 };
 
@@ -80,12 +91,15 @@ public:
 
         if (Books.empty())
         {
-            cout << "No Books Founded❗❗❗❗\n";
+
+            cout << "No Books Found❗❗❗❗\n";
             return;
         }
         else
         {
-
+            cout << "-------------------------------------\n";
+            cout << setw(5) << "ID" << setw(10) << "Name" << setw(10) << "Author" << setw(16) << "Available" << endl;
+            cout << "-------------------------------------\n";
             for (int i = 0; i < Books.size(); i++)
             {
                 Books[i].displayBook();
@@ -201,7 +215,7 @@ public:
         int choice;
         while (true)
         {
-            cout << "------START-MENU------\n";
+            cout << "/n_________START-MENU_________\n";
             cout << "1-ADD BOOK\n";
             cout << "2-DISPLAY BOOK\n";
             cout << "3-SEARCH BOOK\n";
