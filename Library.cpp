@@ -7,11 +7,11 @@ using namespace std;
 class Book
 {
 
-protected:
-    string name_book;
+private:
     string author_book;
 
 public:
+    string name_book;
     int id_book;
     bool availbale = true;
     void info_book()
@@ -26,36 +26,23 @@ public:
         cout << "Enter Author: ";
         cin >> author_book;
     }
-    // void displayBook()
-    // {
-    //     cout << "-------------------------------------\n";
-    //     cout << setw(10) << "The Book of ID:" << setw(5) << id_book << endl;
-    //     cout << "-------------------------------------\n";
-    //     cout << setw(10) << "The Book of Name:" << setw(5) << name_book << endl;
-    //     cout << "-------------------------------------\n";
-    //     cout << setw(10) << "The Book of Author:" << setw(5) << author_book << endl;
-    //     cout << "-------------------------------------\n";
-    // }
+
     void displayBook()
     {
 
         cout << setw(5) << id_book << setw(10) << name_book << setw(10) << author_book << setw(10) << availbale << endl;
         cout << "-------------------------------------\n";
-        // cout << "-------------------------------------\n";
-        // cout << setw(5) << "The Book of Name:" << setw(5) << name_book << endl;
-        // cout << "-------------------------------------\n";
-        // cout << setw(5) << "The Book of Author:" << setw(5) << author_book << endl;
-        // cout << "-------------------------------------\n";
     }
 };
 
 class User
 {
 private:
-    int id_user;
     string name_user;
 
 public:
+    int id_user;
+    vector<Book> borrowBooks;
     void user_info()
     {
         cout << "Enter UserID:";
@@ -137,21 +124,25 @@ public:
         }
     }
 
-    void borrow_book(Book &borrow_book, User &user)
+    void borrow_book(Book &Book)
 
     {
 
-        if (borrow_book.availbale)
+        for (int j = 0; j < Books.size(); j++)
         {
-            borrow_book.availbale = false;
 
-            user.user_info();
-            cout << "Book borrowed Successfully:" << user.getNameUser() << "\n";
-        }
+            if (Books[j].availbale)
+            {
+                Books[j].availbale = false;
+                User user11;
+                user11.user_info();
+                cout << "Book borrowed Successfully:" << user11.getNameUser() << "\n";
+            }
 
-        else
-        {
-            cout << "Book not  borrowed \n";
+            else
+            {
+                cout << "Book not  borrowed \n";
+            }
         }
     }
 
@@ -215,7 +206,7 @@ public:
         int choice;
         while (true)
         {
-            cout << "/n_________START-MENU_________\n";
+            cout << "\n_________START-MENU_________\n";
             cout << "1-ADD BOOK\n";
             cout << "2-DISPLAY BOOK\n";
             cout << "3-SEARCH BOOK\n";
@@ -268,12 +259,11 @@ public:
                         int id;
                         cout << "Enter Book ID:";
                         cin >> id;
-                        User user_1;
                         for (int i = 0; i < Books.size(); i++)
                         {
                             if (Books[i].id_book == id)
                             {
-                                borrow_book(Books[i], user_1);
+                                borrow_book(Books[i]);
                             }
                         }
                         break;
@@ -295,6 +285,7 @@ public:
                     Delete_book(id);
                     break;
                 }
+
                 case 7:
                 {
                     Exit_system();
@@ -302,7 +293,7 @@ public:
                 }
 
                 default:
-                    cout << "Invaild ,Try Again";
+                    cout << "Invaild ,Try Again\n";
                     break;
                 }
             }
