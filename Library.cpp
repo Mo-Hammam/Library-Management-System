@@ -1,19 +1,18 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <fstream>
 
 using namespace std;
 
 class Book
 {
-
-private:
-    string author_book;
-
 public:
+    string author_book;
     string name_book;
     int id_book;
     bool availbale = true;
+
     void info_book()
     {
 
@@ -25,13 +24,6 @@ public:
         cout << endl;
         cout << "Enter Author: ";
         cin >> author_book;
-    }
-
-    void displayBook()
-    {
-
-        cout << setw(5) << id_book << setw(10) << name_book << setw(10) << author_book << setw(10) << availbale << endl;
-        cout << "-------------------------------------\n";
     }
 };
 
@@ -70,7 +62,18 @@ public:
 
         Book b1;
         b1.info_book();
+        for (int i = 0; i < Books.size(); i++)
+        {
+            if (Books[i].id_book == b1.id_book)
+            {
+
+                cout << "❌ ID already exists! Try another ID\n";
+                return;
+            }
+        }
+
         Books.push_back(b1);
+        cout << "✅ Book Added Successfully\n";
     }
 
     void DisplayBook()
@@ -84,13 +87,19 @@ public:
         }
         else
         {
-            cout << "-------------------------------------\n";
-            cout << setw(5) << "ID" << setw(10) << "Name" << setw(10) << "Author" << setw(16) << "Available" << endl;
-            cout << "-------------------------------------\n";
+            string path = "C:\\Users\\vip\\Desktop\\Library\\file.txt";
+            ofstream file(path);
+
+            file << "-------------------------------------\n";
+            file << setw(5) << "ID" << setw(10) << "Name" << setw(10) << "Author" << setw(16) << "Available" << endl;
+            file << "-------------------------------------\n";
             for (int i = 0; i < Books.size(); i++)
             {
-                Books[i].displayBook();
+                file << setw(5) << Books[i].id_book << setw(10) << Books[i].name_book
+                     << setw(10) << Books[i].author_book << setw(10) << Books[i].availbale << endl;
+                file << "-------------------------------------\n";
             }
+            cout << "Done✅✅✅\n";
         }
     }
     void SearchBook(int bookSearch)
@@ -111,7 +120,9 @@ public:
                     cout << "✅✅✅\n";
                     cout << "The Book is Found\n";
                     cout << "✅✅✅\n";
-                    Books[i].displayBook();
+                    cout << setw(5) << Books[i].id_book << setw(10) << Books[i].name_book
+                         << setw(10) << Books[i].author_book << setw(10) << Books[i].availbale << endl;
+                    cout << "-------------------------------------\n";
                 }
                 else
                 {
@@ -195,6 +206,23 @@ public:
         }
     }
 
+    void Sort_Book()
+    {
+
+        int min;
+        for (int i = 0; i < Books.size() - 1; i++)
+        {
+            min = i;
+            for (int j = i + 1; j < Books.size(); j++)
+            {
+                if (Books[j].id_book < Books[min].id_book)
+                {
+                    min = j;
+                }
+            }
+            swap(Books[min], Books[i]);
+        }
+    }
     void Exit_system()
     {
         exit(0);
@@ -213,7 +241,8 @@ public:
             cout << "4-BORROW BOOK\n";
             cout << "5-RETURN BOOK\n";
             cout << "6-DELETE BOOK\n";
-            cout << "7-Exit \n";
+            cout << "7-SORT BOOK\n";
+            cout << "8-Exit \n";
 
             cout << "Enter Your Choice:";
             cin >> choice;
@@ -285,8 +314,14 @@ public:
                     Delete_book(id);
                     break;
                 }
-
                 case 7:
+                {
+                    Sort_Book();
+                    cout << "The Books are Sorted✅✅✅\n";
+                    break;
+                }
+
+                case 8:
                 {
                     Exit_system();
                     break;
