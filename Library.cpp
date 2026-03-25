@@ -7,11 +7,61 @@ using namespace std;
 
 class Book
 {
-public:
+
+private:
     string author_book;
     string name_book;
     int id_book;
     bool availbale = true;
+    void setId(int i)
+    {
+        if (i > 0)
+            id_book = i;
+    }
+    void setName(string n)
+    {
+        if (n.empty())
+            name_book = "Unknown";
+
+        else
+            name_book = n;
+    }
+
+    void setAuthor(string a)
+    {
+        if (a.empty())
+            author_book = "Unknown";
+
+        else
+            name_book = a;
+    }
+
+public:
+    int getId()
+    {
+
+        return id_book;
+    }
+
+    string getName()
+    {
+
+        return name_book;
+    }
+    string getAuthor()
+    {
+
+        return author_book;
+    }
+    bool getAvilabe()
+    {
+
+        return availbale;
+    }
+    void setAvilabe(bool av)
+    {
+        availbale = av;
+    }
 
     void info_book()
     {
@@ -64,7 +114,7 @@ public:
         b1.info_book();
         for (int i = 0; i < Books.size(); i++)
         {
-            if (Books[i].id_book == b1.id_book)
+            if (Books[i].getId() == b1.getId())
             {
 
                 cout << "❌ ID already exists! Try another ID\n";
@@ -95,8 +145,8 @@ public:
             file << "-------------------------------------\n";
             for (int i = 0; i < Books.size(); i++)
             {
-                file << setw(5) << Books[i].id_book << setw(10) << Books[i].name_book
-                     << setw(10) << Books[i].author_book << setw(10) << Books[i].availbale << endl;
+                file << setw(5) << Books[i].getId() << setw(10) << Books[i].getId()
+                     << setw(10) << Books[i].getAvilabe() << setw(10) << Books[i].getAvilabe() << endl;
                 file << "-------------------------------------\n";
             }
             cout << "Done✅✅✅\n";
@@ -115,13 +165,13 @@ public:
         {
             for (int i = 0; i < Books.size(); i++)
             {
-                if (Books[i].id_book == bookSearch)
+                if (Books[i].getId() == bookSearch)
                 {
                     cout << "✅✅✅\n";
                     cout << "The Book is Found\n";
                     cout << "✅✅✅\n";
-                    cout << setw(5) << Books[i].id_book << setw(10) << Books[i].name_book
-                         << setw(10) << Books[i].author_book << setw(10) << Books[i].availbale << endl;
+                    cout << setw(5) << Books[i].getId() << setw(10) << Books[i].getId()
+                         << setw(10) << Books[i].getId() << setw(10) << Books[i].getId() << endl;
                     cout << "-------------------------------------\n";
                 }
                 else
@@ -142,9 +192,9 @@ public:
         for (int j = 0; j < Books.size(); j++)
         {
 
-            if (Books[j].availbale)
+            if (Books[j].getAvilabe())
             {
-                Books[j].availbale = false;
+                Books[j].setAvilabe(false);
                 User user11;
                 user11.user_info();
                 cout << "Book borrowed Successfully:" << user11.getNameUser() << "\n";
@@ -162,13 +212,13 @@ public:
         bool falg = false;
         for (int i = 0; i < Books.size(); i++)
         {
-            if (Books[i].id_book == id)
+            if (Books[i].getId() == id)
             {
                 falg = true;
-                if (Books[i].availbale == false)
+                if (Books[i].getAvilabe() == false)
                 {
 
-                    Books[i].availbale = true;
+                    Books[i].setAvilabe(true);
                     cout << "Book is available Now\n";
                 }
                 else
@@ -196,7 +246,7 @@ public:
 
             for (int i = 0; i < Books.size(); i++)
             {
-                if (Books[i].id_book == id)
+                if (Books[i].getId() == id)
                 {
                     Books.erase(Books.begin() + i);
                     cout << "Book deleted\n";
@@ -215,7 +265,7 @@ public:
             min = i;
             for (int j = i + 1; j < Books.size(); j++)
             {
-                if (Books[j].id_book < Books[min].id_book)
+                if (Books[j].getId() < Books[min].getId())
                 {
                     min = j;
                 }
@@ -290,7 +340,7 @@ public:
                         cin >> id;
                         for (int i = 0; i < Books.size(); i++)
                         {
-                            if (Books[i].id_book == id)
+                            if (Books[i].getId() == id)
                             {
                                 borrow_book(Books[i]);
                             }
