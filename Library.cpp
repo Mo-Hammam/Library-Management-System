@@ -13,6 +13,7 @@ private:
     string name_book;
     int id_book;
     bool availbale = true;
+
     void setId(int i)
     {
         if (i > 0)
@@ -26,7 +27,6 @@ private:
         else
             name_book = n;
     }
-
     void setAuthor(string a)
     {
         if (a.empty())
@@ -42,7 +42,6 @@ public:
 
         return id_book;
     }
-
     string getName()
     {
 
