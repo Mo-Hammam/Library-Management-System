@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <string>
 #include <fstream>
 
 using namespace std;
@@ -80,9 +81,9 @@ class User
 {
 private:
     string name_user;
+    int id_user;
 
 public:
-    int id_user;
     vector<Book> borrowBooks;
     void user_info()
     {
@@ -91,6 +92,15 @@ public:
         cout << endl;
         cout << "Enter UserName: ";
         cin >> name_user;
+    }
+
+    void setIdUser(int i)
+    {
+        i = id_user;
+    }
+    int getIdUser()
+    {
+        return id_user;
     }
 
     string getNameUser()
@@ -144,14 +154,14 @@ public:
             file << "-------------------------------------\n";
             for (int i = 0; i < Books.size(); i++)
             {
-                file << setw(5) << Books[i].getId() << setw(10) << Books[i].getId()
+                file << setw(5) << Books[i].getId() << setw(10) << Books[i].getName()
                      << setw(10) << Books[i].getAvilabe() << setw(10) << Books[i].getAvilabe() << endl;
                 file << "-------------------------------------\n";
             }
             cout << "Done✅✅✅\n";
         }
     }
-    void SearchBook(int bookSearch)
+    void SearchBook(string value, int choice)
     {
 
         if (Books.empty())
@@ -164,15 +174,35 @@ public:
         {
             for (int i = 0; i < Books.size(); i++)
             {
-                if (Books[i].getId() == bookSearch)
+                if (choice == 1 && to_string(Books[i].getId()) == value)
                 {
                     cout << "✅✅✅\n";
                     cout << "The Book is Found\n";
                     cout << "✅✅✅\n";
-                    cout << setw(5) << Books[i].getId() << setw(10) << Books[i].getId()
-                         << setw(10) << Books[i].getId() << setw(10) << Books[i].getId() << endl;
+                    cout << setw(5) << Books[i].getId() << setw(10) << Books[i].getName()
+                         << setw(10) << Books[i].getAuthor() << setw(10) << Books[i].getAvilabe() << endl;
                     cout << "-------------------------------------\n";
                 }
+
+                else if (choice == 2 && Books[i].getName() == value)
+                {
+                    cout << "✅✅✅\n";
+                    cout << "The Book is Found\n";
+                    cout << "✅✅✅\n";
+                    cout << setw(5) << Books[i].getId() << setw(10) << Books[i].getName()
+                         << setw(10) << Books[i].getAuthor() << setw(10) << Books[i].getAvilabe() << endl;
+                    cout << "-------------------------------------\n";
+                }
+                else if (choice == 3 && Books[i].getAuthor() == value)
+                {
+                    cout << "✅✅✅\n";
+                    cout << "The Book is Found\n";
+                    cout << "✅✅✅\n";
+                    cout << setw(5) << Books[i].getId() << setw(10) << Books[i].getName()
+                         << setw(10) << Books[i].getAuthor() << setw(10) << Books[i].getAvilabe() << endl;
+                    cout << "-------------------------------------\n";
+                }
+
                 else
                 {
                     cout << "❗❗❗❗\n";
@@ -316,10 +346,39 @@ public:
 
                 case 3:
 
-                    int bookSearch;
-                    cout << "Enter the ID of Book to Search it:";
-                    cin >> bookSearch;
-                    SearchBook(bookSearch);
+                    int howsearch;
+                    cout << "How Can Help You to Search your Book?";
+                    cout << "1) ID\n";
+                    cout << "2) Name\n";
+                    cout << "3) Author\n";
+
+                    cin >> howsearch;
+
+                    if (howsearch == 1)
+                    {
+
+                        string bookSearch;
+                        cout << "Enter the ID of Book to Search it:";
+                        cin >> bookSearch;
+                        SearchBook(bookSearch, howsearch);
+                    }
+                    else if (howsearch == 2)
+                    {
+
+                        string bookSearch;
+                        cout << "Enter the Name of Book to Search it:";
+                        cin >> bookSearch;
+                        SearchBook(bookSearch, howsearch);
+                    }
+                    else
+                    {
+
+                        string bookSearch;
+                        cout << "Enter the Author of Book to Search it:";
+                        cin >> bookSearch;
+                        SearchBook(bookSearch, howsearch);
+                    }
+
                     break;
                 case 4:
 
